@@ -1,4 +1,6 @@
-const Koa = require('koa')
+import Koa from 'koa';
+import { db } from './src/resources/db-connect';
+
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
@@ -6,8 +8,8 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const index = require('./routes/index')
-const users = require('./routes/users')
+const index = require('./src/routes/index')
+const users = require('./src/routes/users')
 
 // error handler
 onerror(app)
@@ -33,12 +35,14 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
+// app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
+
+
 
 module.exports = app
