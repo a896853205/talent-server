@@ -19,7 +19,7 @@ router.get('/register', async (ctx, next) => {
       return;
   }
   
-  result = await collections.findOne({ _user_id_card: user_id_card });
+  result = await userDao.selectByCard(user_id_card);
 
   if (result) {
       ctx.body = -2
