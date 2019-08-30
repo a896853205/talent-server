@@ -1,5 +1,6 @@
 import Koa from 'koa';
-import { cors } from './cors-config';
+import cors from 'koa2-cors';
+// import { cors } from './cors-config';
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
@@ -9,6 +10,7 @@ const logger = require('koa-logger')
 
 const users = require('./src/routes/users')
 
+app.use(cors());
 // error handler
 onerror(app)
 
@@ -36,7 +38,6 @@ app.use(async (ctx, next) => {
 // app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
-app.use(cors);
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
