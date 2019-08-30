@@ -3,8 +3,10 @@ import  { db } from '../resources/db-connect';
 export const userDao = {
 
   // 增加用户
-  insertUser: (_user_name, _user_password, _user_id_card) => {
-    return collections.insert({_user_name, _user_password, _user_id_card});
+  insertUser: async (_user_name, _user_password, _user_id_card) => {
+    let collection = await db.get('company_users');
+
+    return await collection.insert({_user_name, _user_password, _user_id_card});
   },
 
   // 获取userid
@@ -24,16 +26,16 @@ export const userDao = {
   },
 
   // 通过用户名查找
-  selectByName: _user_name => {
-    collections = db.get('company_users');
+  selectByName:async _user_name => {
+    let collections = await db.get('company_users');
 
-    return collections.findOne({ _user_name });
+    return await collections.findOne({ _user_name });
   },
 
   // 通过idcard查找
-  selectByCard: _user_id_card => {
-    collections = db.get('company_users');
+  selectByCard:async _user_id_card => {
+    let collections = await db.get('company_users');
 
-    return collections.findOne({ _user_id_card });
+    return await collections.findOne({ _user_id_card });
   }
 }
