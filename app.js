@@ -8,7 +8,8 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const users = require('./src/routes/users')
+const users = require('./src/routes/users');
+const form = require('./src/routes/form');
 
 app.use(cors());
 // error handler
@@ -36,7 +37,8 @@ app.use(async (ctx, next) => {
 
 // routes
 // app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(users.routes(), users.allowedMethods());
+app.use(form.routes(), form.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
