@@ -17,6 +17,7 @@ export const formDao = {
       return -1;
     } else {
       let collection = await db.get('company_forms');
+      
       return await collection.findOne({ _from_user: user_id.toString() });
     }
   },
@@ -27,6 +28,6 @@ export const formDao = {
   companyFormSave: async data => {
     let collection = await db.get('company_forms');
 
-    return await collection.update({ _id: data._id }, {$set: data});
+    return await collection.update({ _id: data._id }, { $set: data });
   }
 }
