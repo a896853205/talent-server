@@ -1,4 +1,3 @@
-import { db } from '../resources/db-connect';
 import { userDao } from '../dao/user-dao';
 import { formDao } from '../dao/form-dao';
 
@@ -27,7 +26,6 @@ router.get('/register', async (ctx, next) => {
   }
 
   result = await userDao.insertUser(user_name, user_password, user_id_card);
-  await formDao.initFrom(result._id);
 
   ctx.body = 1
 })
@@ -36,16 +34,10 @@ router.get('/register', async (ctx, next) => {
  * 用户登录
  */
 router.post('/login', async (ctx, next) => {
-  let { user_name, user_password, form } = ctx.request.body;
+  let { user_name, user_password } = ctx.request.body;
 
-  let userId = await userDao.getUserId(user_name, user_password)
-
-  // 未初始化的时候将初始化的数据
-  
-  let returnForm = await formDao.getCompanyForm(userId)
-  if (!returnForm) {
-    returnForm = await formDao.initFrom(userId, form);
-  }
+  let userId = await userDao.getUserId(user_name, user_password);
+  let returnForm = await formDao.getCompanyForm(userId);
 
   ctx.body = { userId, returnForm };
 })
