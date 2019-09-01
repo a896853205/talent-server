@@ -27,7 +27,7 @@ router.get('/register', async (ctx, next) => {
   }
 
   result = await userDao.insertUser(user_name, user_password, user_id_card);
-  await formDao.initFrom(result._id);
+  // await formDao.initFrom(result._id);
 
   ctx.body = 1
 })
