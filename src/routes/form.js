@@ -20,7 +20,7 @@ router.post('/companyFormSave', async (ctx, next) => {
   if (returnForm) {
     formDao.companyFormSave(form);
   } else {
-    formDao.initFrom(form);
+    formDao.initFrom(userId, form);
   }
   
   //如果是提交状态，就生成对应的excel文件

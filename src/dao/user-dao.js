@@ -14,6 +14,8 @@ export const userDao = {
     let collection = await db.get('company_users'),
         user = await collection.findOne({ _user_name: user_name });
     
+    console.log(user_name);
+
     if (!user) {
       return -1;
     }
