@@ -13,12 +13,16 @@ export const formDao = {
    * 获取form数据
    */
   getCompanyForm: async user_id => {
-    if (user_id === -1 || user_id === -2) {
-      return -1;
+    if (user_id) {
+      if (user_id === -1 || user_id === -2) {
+        return -1;
+      } else {
+        let collection = await db.get('company_forms');
+        
+        return await collection.findOne({ _from_user: user_id.toString() });
+      }
     } else {
-      let collection = await db.get('company_forms');
-      
-      return await collection.findOne({ _from_user: user_id.toString() });
+      return;
     }
   },
 

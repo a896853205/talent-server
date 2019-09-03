@@ -37,9 +37,9 @@ router.post('/login', async (ctx, next) => {
   let { user_name, user_password } = ctx.request.body;
 
   let userId = await userDao.getUserId(user_name, user_password);
-  let returnForm = await formDao.getCompanyForm(userId);
+  // let returnForm = await formDao.getCompanyForm(userId);
 
-  ctx.body = { userId, returnForm };
+  ctx.body = { userId };
 })
 
 module.exports = router
