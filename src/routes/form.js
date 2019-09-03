@@ -14,7 +14,7 @@ router.get('/companyFormGet', async (ctx, next) => {
 router.post('/companyFormSave', async (ctx, next) => {
   let { form, userId } = ctx.request.body,
       returnForm = await formDao.getCompanyForm(userId);
-  
+      
   // 当数据库没有数据时插入,有数据时进行更新操作.
   if (returnForm) {
     formDao.companyFormSave(form);
