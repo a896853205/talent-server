@@ -31,7 +31,7 @@ export const formDao = {
    */
   companyFormSave: async data => {
     let collection = await db.get('company_forms');
-
-    return await collection.update({ _id: data._id }, { $set: data });
+    await collection.remove({ _id: data._id });
+    return await collection.insert(data);
   }
 }
