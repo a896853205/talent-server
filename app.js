@@ -11,6 +11,7 @@ const logger = require('koa-logger')
 const users = require('./src/routes/users');
 const form = require('./src/routes/form');
 const miniapp = require('./src/routes/miniapp')
+const excel = require('./src/routes/excel')
 
 app.use(cors());
 // error handler
@@ -41,6 +42,7 @@ app.use(async (ctx, next) => {
 app.use(users.routes(), users.allowedMethods());
 app.use(form.routes(), form.allowedMethods());
 app.use(miniapp.routes(), form.allowedMethods());
+app.use(excel.routes(), form.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
