@@ -15,7 +15,6 @@ router.post('/companyFormSave', async (ctx, next) => {
   let { form, userId } = ctx.request.body,
       returnForm = await formDao.getCompanyForm(userId);
 
-      console.log(form._basic);
   // 当数据库没有数据时插入,有数据时进行更新操作.
   if (returnForm) {
     formDao.companyFormSave(form);
@@ -23,28 +22,16 @@ router.post('/companyFormSave', async (ctx, next) => {
     formDao.initFrom(userId, form);
   }
   
-  //如果是提交状态，就生成对应的excel文件
-  // if(data._confirmed){
-  //   //生成当前用户的Excel，以用户的id为名字
-  //   let excelName = data._from_user
-  //   console.log(excelName)
-  //   let _basic = data._basic
-  //   let _sum_in = await generateGangWeiLeiBie2(data._sum_in)
-  //   let _sum_out = await generateGangWeiLeiBie2(data._sum_out)
-  //   let _summary = await generateGangWeiLeiBie2(data._summary)
-  //   let _out_status = data._out_status
-  //   let _need = data._need
-  //   let sourceData = [
-  //       [_basic],
-  //       _sum_in,
-  //       _sum_out,
-  //       _summary,
-  //       _out_status,
-  //       _need,
-  //   ]
-  //   await generateExcel(sourceData,excelName)
-  // }
   ctx.response.body = 'success'
 })
+
+router.post('/companyFormSubmit', async ctx => {
+  let { form } = ctx.request.body;
+
+  form._confirmed = true;
+  formDao.companyFormSave(form);
+
+  ctx.response.body = 'success'
+});
 
 module.exports = router

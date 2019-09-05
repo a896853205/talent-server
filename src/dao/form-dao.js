@@ -1,10 +1,13 @@
 import  { db } from '../resources/db-connect';
 
 export const formDao = {
-  // 初始化表单
-  initFrom: async (user_id, form) => {
+  /**
+   * 初始化表单
+   */
+  initFrom: async (userId, form) => {
     let form_collection = await db.get('company_forms');
-    form._from_user = user_id.toString();
+    console.log(userId);
+    form._from_user = userId.toString();
 
     return await form_collection.insert(form);
   },

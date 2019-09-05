@@ -8,7 +8,12 @@ export const outStatusTransform = _out_status => {
     let info = [];
     for (let outStatusItem of element.info) {
       if (outStatusItem.label === '离职时间') {
-        let formatTime = outStatusItem.value.slice(0, 10)
+        let formatTime = '';
+        
+        if (outStatusItem.value) {
+          formatTime = outStatusItem.value.slice(0, 10);
+        }
+        
         info.push(formatTime)
       } else if (outStatusItem.label === '离职原因（多选）') {
         let arr = new Array(12)
