@@ -9,3 +9,6 @@ pathHelper.generateReadPath = (fileName) => {
 pathHelper.generateWritePath = (userId) => {
   return path.join(__dirname, '../../resources/excel-generate/' + userId + '.xlsx')
 }
+
+pathHelper.downLoadPath = () => path.join(__dirname, '../../resources/excel-generate/')
+
