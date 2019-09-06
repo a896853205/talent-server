@@ -1,5 +1,4 @@
 import { formDao } from '../dao/form-dao';
-import { userDao } from '../dao/user-dao';
 
 const router = require('koa-router')()
 

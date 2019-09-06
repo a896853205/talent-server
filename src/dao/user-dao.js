@@ -1,4 +1,5 @@
 import { db } from '../resources/db-connect';
+import { formDao } from '../dao/form-dao';
 
 export const userDao = {
 
@@ -153,5 +154,26 @@ export const userDao = {
     let collections = await db.get('company_users');
     
     collections.update({ _id: userId }, { _submit_status: 1 });
+  },
+
+  // 删除用户
+  deleteUser: async userId => {
+    let collections = await db.get('company_users');
+    
+    collections.remove({ _id: userId });
+  },
+
+  packingSubUser: async subUserArr => {
+    for (let subUser of subUserArr) {
+      let subForm = await formDao.getCompanyForm(subUser);
+
+      if (!subForm || !subForm._confirmed) {
+        subUser._confirmed = 0;
+      } else {
+        subUser._confirmed = 1;
+      }
+    }
+
+    return subUserArr;
   }
 }

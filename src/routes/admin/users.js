@@ -42,6 +42,9 @@ router.post('/manageInfo', async ctx => {
 
   let user = await userDao.selectByUserId(userId);
   subUserArr = await userDao.querySubUser(user._user_code);
+  // 添加上问卷提交状态属性
+  subUserArr = await userDao.packingSubUser(subUserArr);
+
   ctx.body = new Result({
     data: subUserArr
   });
