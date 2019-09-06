@@ -150,7 +150,7 @@ export const userDao = {
 
     // 如果是一级或二级的账户需要判断后面是否是'0000'.
     // 三级不用判断,四级没有下属
-    
+
     if (length + 8 <= 16) {
       // 是一二级的
       // 获取下属
@@ -188,11 +188,13 @@ export const userDao = {
     let collections = await db.get('company_users');
     let user = {};
 
-    user = userDao.selectByUserId(userId);
+    user = await userDao.selectByUserId(userId);
+
     if (user._user_password !== oldPassword) {
       return;
     } else {
-      return await collections.update({ _id: userId }, { _user_password: newPassword });
+      await collections.update({ _id: user._id }, {"$set": { _user_password: newPassword }});
+      return 1;
     }
   }
 }
