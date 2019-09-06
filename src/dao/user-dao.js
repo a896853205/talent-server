@@ -51,7 +51,7 @@ export const userDao = {
     }
 
     // 判断是否拥有权限或者是超级账户
-    if (user.role !== role || user.role !== 2) {
+    if (user._user_role !== role || user._user_role !== 2) {
       return;
     }
 
