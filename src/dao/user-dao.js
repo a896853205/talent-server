@@ -129,7 +129,9 @@ export const userDao = {
   querySubUser: async userCode => {
     let collections = await db.get('company_users'),
     allUser = await collections.find({}, { sort: '_user_code' });
-    let userCodeArr = []; // 下属
+
+    let subUserArr = [];
+    let userCodeArr = []; // 下属code
 
     // 判断有效长度
     for (let userCodeIndex = 0; userCodeIndex <= 12; userCodeIndex += 4) {
@@ -140,7 +142,10 @@ export const userDao = {
     }) * 4;
 
     // 获取下属
-    return allUser.filter(suUser => (suUser._user_code.substr(0, length) === userCode.substr(0, length)));
+    subUserArr = allUser.filter(suUser => (suUser._user_code.substr(0, length) === userCode.substr(0, length)));
+    // 会查出来自己,把自己清除掉
+    subUserArr.shift();
+    return subUserArr;
   },
 
   // 向上级部门提交
