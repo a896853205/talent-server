@@ -46,15 +46,16 @@ export const userDao = {
     let collection = await db.get('company_users'),
       user = await collection.findOne({ _user_name: userName });
 
+    console.log(1);
     if (!user || (user._user_password !== userPassword)) {
       return;
     }
-
+    console.log(2);
     // 判断是否拥有权限或者是超级账户
-    if (user._user_role !== role || user._user_role !== 2) {
+    if (user._user_role !== 2 && user._user_role !== role) {
       return;
     }
-
+    console.log(3);
     return user;
   }
 }
