@@ -52,7 +52,19 @@ router.post('/submitManage', async ctx => {
   let { userId } = ctx.request.body;
 
   await userDao.submitManage(userId)
-  ctx.body = new Result();
+  ctx.body = new Result({
+    msg: '提交成功'
+  });
+})
+
+// 删除用户
+router.post('/deleteUser', async ctx => {
+  let { userId } = ctx.request.body;
+
+  await userDao.deleteUser(userId);
+  ctx.body = new Result({
+    msg: '删除成功'
+  });
 })
 
 // 修改密码
