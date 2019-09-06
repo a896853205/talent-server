@@ -20,24 +20,39 @@ router.post('/login', async ctx => {
 
 // 管理权限的生成用户名和密码路由
 router.post('/register', async ctx => {
-  let { companyName, userRole, userCode } = ctx.request.body;
+  let { companyName, userRole, userId } = ctx.request.body;
+  // 生成的usercode
+  let subUserCode = '';
 
+  // 根据自己生成一个下属的userCode
+  subUserCode = await userDao.initUserCode(userId);
+  // 再insert一个User
+  await userDao.insertUser(companyName, userRole, subUserCode);
 
-  ctx.body = 'success';
+  ctx.body = new Result({
+    msg: '添加成功'
+  });
 });
 
 // 获取当前用户下的管理信息
 router.post('/manageInfo', async ctx => {
+  let { userId } = ctx.request.body;
 
+  let subUserArr = [];
 
-  ctx.body = 'success';
+  let user = await userDao.selectByUserId(userId);
+  subUserArr = await userDao.querySubUser(user._user_code);
+  ctx.body = new Result({
+    data: subUserArr
+  });
 })
 
 // 向上级部门提交的管理信息
 router.post('/submitManage', async ctx => {
+  let { userId } = ctx.request.body;
 
-
-  ctx.body = 'success';
+  await userDao.submitManage(userId)
+  ctx.body = new Result();
 })
 
 // 修改密码
