@@ -1,19 +1,20 @@
 import { generateExcel } from '../service/excel-service'
 import send from 'koa-send';
-
+import { formDao } from '../dao/form-dao';
 import { pathHelper } from '../service/excel-util/path-helper'
 
 const router = require('koa-router')()
 
 
 router.post('/generateExcel', async (ctx, next) => {
-  let { form } = ctx.request.body;
-  let formUser = form._from_user
+  let { userId } = ctx.request.body;
+  // let formUser = form._from_user
 
+  let form = await formDao.getCompanyForm(userId);
   // 提交表格时，生成以自己ID命名的Excel表格
 
   //获取到用户的id
-  await generateExcel(form, formUser)
+  await generateExcel(form, userId)
 
   ctx.body = '生成表格成功';
 })

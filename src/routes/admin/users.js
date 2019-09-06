@@ -1,4 +1,5 @@
 import { userDao } from '../../dao/user-dao';
+import { formDao } from '../../dao/form-dao';
 import { Result } from '../../../util/response';
 
 const router = require('koa-router')();
@@ -43,7 +44,15 @@ router.post('/manageInfo', async ctx => {
   let user = await userDao.selectByUserId(userId);
   subUserArr = await userDao.querySubUser(user._user_code);
   // 添加上问卷提交状态属性
-  subUserArr = await userDao.packingSubUser(subUserArr);
+  for (let subUser of subUserArr) {
+    let subForm = await formDao.getCompanyForm(subUser);
+
+    if (!subForm || !subForm._confirmed) {
+      subUser._confirmed = 0;
+    } else {
+      subUser._confirmed = 1;
+    }
+  }
 
   ctx.body = new Result({
     data: subUserArr
@@ -72,9 +81,19 @@ router.post('/deleteUser', async ctx => {
 
 // 修改密码
 router.post('/alterPassword', async ctx => {
+  let { userId, oldPassword, newPassword } = ctx.request.body;
 
-
-  ctx.body = 'success';
+  let result = await userDao.alterPassword(userId, oldPassword, newPassword);
+  if (result) {
+    ctx.body = new Result({
+      msg: '修改成功'
+    });
+  } else {
+    ctx.body = new Result({
+      msg: '原密码不正确',
+      status: 0
+    });
+  }
 })
 
 module.exports = router;

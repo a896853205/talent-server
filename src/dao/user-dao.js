@@ -163,17 +163,16 @@ export const userDao = {
     collections.remove({ _id: userId });
   },
 
-  packingSubUser: async subUserArr => {
-    for (let subUser of subUserArr) {
-      let subForm = await formDao.getCompanyForm(subUser);
+  // 修改密码
+  alterPassword: async (userId, oldPassword, newPassword) => {
+    let collections = await db.get('company_users');
+    let user = {};
 
-      if (!subForm || !subForm._confirmed) {
-        subUser._confirmed = 0;
-      } else {
-        subUser._confirmed = 1;
-      }
+    user = userDao.selectByUserId(userId);
+    if (user._user_password !== oldPassword) {
+      return;
+    } else {
+      return await collections.update({ _id: userId }, { _user_password: newPassword });
     }
-
-    return subUserArr;
   }
 }
