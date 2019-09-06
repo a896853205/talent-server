@@ -6,6 +6,10 @@ router.get("/ping", async function(ctx, next) {
   ctx.body = "pong!";
 });
 
+router.get("/go", async function(ctx, next) {
+  ctx.body = await miniappDao.checkGo();
+})
+
 router.get("/new_user", async (ctx, next) => {
   console.log("new user");
   const user_inserting = {
