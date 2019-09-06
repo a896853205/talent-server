@@ -8,7 +8,8 @@ export const userDao = {
     let collection = await db.get('company_users');
     let roleNum = -1,
       distributionRole = false,
-      writeRole = false;
+      writeRole = false,
+      submitStatus = 0;
 
     distributionRole = userRole.includes('分配用户权限')
     writeRole = userRole.includes('填报权限');
@@ -21,11 +22,16 @@ export const userDao = {
       roleNum = 0;
     }
 
+    // 如果只能写,说明没有下属
+    if (!roleNum) {
+      submitStatus = -1;
+    }
+
     return await collection.insert({
       _user_name: subUserCode,
       _user_password: '123456',
       _user_code: subUserCode,
-      _submit_status: 0,
+      _submit_status: submitStatus,
       _company_name: companyName,
       _user_role: roleNum
     });
