@@ -72,18 +72,15 @@ export const userDao = {
     let collection = await db.get('company_users'),
       user = await collection.findOne({ _user_name: userName });
 
-      console.log(user);
     if (!user || (user._user_password !== userPassword)) {
       return;
     }
 
-    console.log(2);
     // 判断是否拥有权限或者是超级账户
     if (user._user_role !== 2 && user._user_role !== role) {
       return;
     }
 
-    console.log(3);
     return user;
   },
 
@@ -110,8 +107,6 @@ export const userDao = {
       // 找到最大的下属+1
       codeNum = parseInt(subUser[subUser.length - 1]._user_code.substr(length, 4));
       codeNum++;
-
-      console.log(codeNum);
 
       if (codeNum < 10) {
         codeNum = '000' + codeNum;
