@@ -135,7 +135,7 @@ export const userDao = {
   // 根据userCode获取当前用户下属数据
   querySubUser: async userCode => {
     let collections = await db.get('company_users'),
-    allUser = await collections.find({}, { sort: '_user_code' });
+      allUser = await collections.find({}, { sort: '_user_code' });
 
     let subUserArr = [];
     let userCodeArr = []; // 下属code
@@ -148,8 +148,22 @@ export const userDao = {
       return (userCodeItem === '0000');
     }) * 4;
 
-    // 获取下属
-    subUserArr = allUser.filter(suUser => (suUser._user_code.substr(0, length) === userCode.substr(0, length)));
+    // 如果是一级或二级的账户需要判断后面是否是'0000'.
+    // 三级不用判断,四级没有下属
+    
+    if (length + 8 <= 16) {
+      // 是一二级的
+      // 获取下属
+      subUserArr = allUser.filter(suUser => {
+        return (suUser._user_code.substr(0, length) === userCode.substr(0, length)) && ('0000' === suUser._user_code.substr(length + 4, 4));
+      });
+    } else {
+      // 获取下属
+      subUserArr = allUser.filter(suUser => {
+        return (suUser._user_code.substr(0, length) === userCode.substr(0, length));
+      });
+    }
+
     // 会查出来自己,把自己清除掉
     subUserArr.shift();
     return subUserArr;
@@ -158,14 +172,14 @@ export const userDao = {
   // 向上级部门提交
   submitManage: async userId => {
     let collections = await db.get('company_users');
-    
+
     collections.update({ _id: userId }, { _submit_status: 1 });
   },
 
   // 删除用户
   deleteUser: async userId => {
     let collections = await db.get('company_users');
-    
+
     collections.remove({ _id: userId });
   },
 
