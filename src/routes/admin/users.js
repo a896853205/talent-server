@@ -45,6 +45,7 @@ router.post('/manageInfo', async ctx => {
   subUserArr = await userDao.querySubUser(user._user_code);
   // 添加上问卷提交状态属性
   for (let subUser of subUserArr) {
+    // 获取每个子用户表单提交状态
     let subForm = await formDao.getCompanyForm(subUser);
 
     if (!subForm || !subForm._confirmed) {
@@ -52,6 +53,20 @@ router.post('/manageInfo', async ctx => {
     } else {
       subUser._confirmed = 1;
     }
+    // 查询他们的子集
+    let subSubmitMum = 0;
+    let subSubNum = 0;
+    let subSubUser = await userDao.querySubUser(subUser._user_code);
+    if (subSubNum) {
+      subSubNum = subSubNum.length;
+    }
+    for (let subsubItem of subSubUser) {
+      if (subsubItem._submit_status === 1) {
+        subSubmitMum ++;
+      }
+    }
+
+    subUser._sub_submit_status = `${subSubmitMum} / ${subSubNum}`;
   }
 
   ctx.body = new Result({
