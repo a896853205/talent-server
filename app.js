@@ -14,6 +14,8 @@ const users = require('./src/routes/users');
 const form = require('./src/routes/form');
 const miniapp = require('./src/routes/miniapp')
 const excel = require('./src/routes/excel')
+// 权限管理的路由
+const adminUser = require('./src/routes/admin/users');
 
 app.use(cors());
 // error handler
@@ -50,6 +52,9 @@ app.use(users.routes(), users.allowedMethods());
 app.use(form.routes(), form.allowedMethods());
 app.use(miniapp.routes(), form.allowedMethods());
 app.use(excel.routes(), form.allowedMethods());
+
+// 权限管理路由
+app.use(adminUser.routes(), adminUser.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {

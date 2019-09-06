@@ -1,12 +1,12 @@
-import { userDao } from '../dao/user-dao';
-import { Result } from '';
+import { userDao } from '../../dao/user-dao';
+import { Result } from '../../../util/response';
 
 const router = require('koa-router')();
 
 router.prefix('/admin')
 
 // 管理权限的登录路由
-router.post('./login', async ctx => {
+router.post('/login', async ctx => {
   let { userName, userPassword } = ctx.request.body;
 
   let user = await userDao.verifyUser(userName, userPassword, 1);
@@ -19,7 +19,7 @@ router.post('./login', async ctx => {
 });
 
 // 管理权限的生成用户名和密码路由
-router.post('./register', async ctx => {
+router.post('/register', async ctx => {
   let { companyName, userRole, userCode } = ctx.request.body;
 
 
@@ -27,22 +27,24 @@ router.post('./register', async ctx => {
 });
 
 // 获取当前用户下的管理信息
-router.post('./manageInfo', async ctx => {
+router.post('/manageInfo', async ctx => {
 
 
   ctx.body = 'success';
 })
 
 // 向上级部门提交的管理信息
-router.post('./submitManage', async ctx => {
+router.post('/submitManage', async ctx => {
 
 
   ctx.body = 'success';
 })
 
 // 修改密码
-router.post('./alterPassword', async ctx => {
+router.post('/alterPassword', async ctx => {
 
 
   ctx.body = 'success';
 })
+
+module.exports = router;
