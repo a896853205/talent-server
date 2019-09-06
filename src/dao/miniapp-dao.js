@@ -5,6 +5,10 @@ export const miniappDao = {
     let collections = db.get("forms");
     return await collections.insert(userInserting);
   },
+  checkGo: async () => {
+    let collections = db.get("configs");
+    return await collections.findOne({ _go: "go"});
+  },
   getUserStatus: async userId => {
     let collections = db.get("forms");
     return await collections.findOne({ _id: userId });

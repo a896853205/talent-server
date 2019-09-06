@@ -46,6 +46,7 @@ export const userDao = {
     let collection = await db.get('company_users'),
       user = await collection.findOne({ _user_name: userName });
 
+      console.log(user);
     console.log(1);
     if (!user || (user._user_password !== userPassword)) {
       return;
