@@ -38,6 +38,15 @@ router.post('/login', async (ctx, next) => {
   let userId = await userDao.getUserId(user_name, user_password);
   // let returnForm = await formDao.getCompanyForm(userId);
 
+
+  let result = await userDao.verifyUser(user_name, user_password, 0);
+
+  if (result) {
+    userId = result._id;
+  } else {
+    userId = undefined;
+  }
+  
   ctx.body = { userId };
 })
 
