@@ -46,7 +46,7 @@ router.post('/manageInfo', async ctx => {
   // 添加上问卷提交状态属性
   for (let subUser of subUserArr) {
     // 获取每个子用户表单提交状态
-    let subForm = await formDao.getCompanyForm(subUser);
+    let subForm = await formDao.getCompanyForm(subUser._id);
 
     if (!subForm || !subForm._confirmed) {
       subUser._confirmed = 0;
