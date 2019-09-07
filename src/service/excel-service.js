@@ -8,10 +8,8 @@ import { pathHelper } from '../service/excel-util/path-helper';
 import { transform } from './excel-util/transform-to-excel-helper'
 
 export async function generateExcel(data, excelName) {
-  //判断单位性质，生成对应的表格
-
-  //这里先判断是否提交
-  // if(_comfirmed)
+  //获取到转换后的数据格式
+  let transformData = transform(data)
 
   //完后根据单位性质生成对应的表格
   let readPath = '';
@@ -21,14 +19,14 @@ export async function generateExcel(data, excelName) {
   switch (data._basic[4].value) {
     case '机关':
       readPath = pathHelper.generateReadPath('单位问卷—机关—打印版');
-      console.log(transform(data)._need[0]);
+      console.log('test...',transformData._sum_out[0].info[127]);
       sourceData = [
         data._basic,
-        transform(data)._summary,
-        transform(data)._sum_in,
-        transform(data)._sum_out,
-        transform(data)._out_status,
-        transform(data)._need,
+        transformData._summary,
+        transformData._sum_in,
+        transformData._sum_out,
+        transformData._out_status,
+        transformData._need,
       ]
       break;
     case '社会团体':
