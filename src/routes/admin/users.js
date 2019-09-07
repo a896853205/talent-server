@@ -57,8 +57,8 @@ router.post('/manageInfo', async ctx => {
     let subSubmitMum = 0;
     let subSubNum = 0;
     let subSubUser = await userDao.querySubUser(subUser._user_code);
-    if (subSubNum) {
-      subSubNum = subSubNum.length;
+    if (subSubUser) {
+      subSubNum = subSubUser.length;
     }
     for (let subsubItem of subSubUser) {
       if (subsubItem._submit_status === 1) {
