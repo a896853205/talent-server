@@ -1,7 +1,7 @@
 export const summaryTransform = _summary => {
   // 这里是转换_summary的数据结构的
   let transformSummary = [];
-  let allDataStructure = [];
+
   _summary = Array.from(_summary)
   for (let yearItem of _summary) {
     let obj = {};
