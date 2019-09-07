@@ -1,4 +1,4 @@
-import { summaryTransform } from './transform/summary';
+import { summaryTransform } from './transform/summary';  //机关的 summary
 import { sumInTransform } from './transform/sum-in';
 import { sumOutTransform } from './transform/sum-out';
 import { outStatusTransform } from './transform/out-status';
@@ -47,7 +47,11 @@ export const transform = form => {
     default:
       // 非事业单位调用非事业单位的处理函数
       // summary数据处理
-      // _summary = summaryTransform(form._summary);
+      _summary = summaryTransform(form._summary);
+      _sum_in = sumInTransform(form._sum_in);
+      _sum_out = sumOutTransform(form._sum_out);
+      _out_status = outStatusTransform(form._out_status);
+      _need = needTransform(form._need);
   }
 
   // 最终的返回数据

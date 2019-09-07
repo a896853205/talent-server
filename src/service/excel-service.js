@@ -44,7 +44,12 @@ export async function generateExcel(data, excelName) {
     default:
       readPath = pathHelper.generateReadPath('单位问卷—企业—打印版');
       sourceData = [
-
+        data._basic,
+        transformData._summary,
+        transformData._sum_in,
+        transformData._sum_out,
+        transformData._out_status,
+        transformData._need,
       ]
   }
 

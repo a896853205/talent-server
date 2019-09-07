@@ -10,6 +10,10 @@ export const summaryTransform = _summary => {
 
     //职工人数
     let num1 = yearItem.info[0].value; // 职工人数
+
+    //当年年度产值（万元）
+    let num128 = yearItem.info[1].value;;
+
     info.push(num1);
 
     // 性别结构
@@ -34,6 +38,8 @@ export const summaryTransform = _summary => {
     let num15 = 0;
     let num16 = 0;
     let num17 = 0;
+
+
     let num18 = 0;
     let num19 = 0;
 
@@ -158,6 +164,8 @@ export const summaryTransform = _summary => {
     let num126 = 0; //15000-20000
     let num127 = 0; //20000以上
 
+
+
     yearItem.info[0].children.children.forEach(element => {
       let eachDataStructure = element;
 
@@ -208,6 +216,24 @@ export const summaryTransform = _summary => {
     // })
     yearItem.info[0].children.children.forEach(eachClass => {
       switch (eachClass.prop) {
+        case '企业经营管理人员':
+          let n14Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '出资人代表');
+          });
+          if (n14Enterprise) num14 = n14Enterprise.num;
+          let n15Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '经营管理人员');
+          });
+          if (n15Enterprise) num15 = n15Enterprise.num;
+          let n16Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '党群工作者');
+          });
+          if (n16Enterprise) num16 = n16Enterprise.num;
+          let n17Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '其他');
+          });
+          if (n17Enterprise) num17 = n17Enterprise.num;
+          break;
         case '管理人员':
           let n14 = eachClass.children[4].value.find(eachTwoClass => {
             return (eachTwoClass.cas[0] === '省部级');
@@ -835,7 +861,7 @@ export const summaryTransform = _summary => {
     info.push(num116);
 
     info.push(num117);
-    
+
     info.push(num118);
     info.push(num119);
     info.push(num120);
@@ -846,7 +872,7 @@ export const summaryTransform = _summary => {
     info.push(num125);
     info.push(num126);
     info.push(num127);
-
+    info.push(num128);
 
 
     obj.info = info;

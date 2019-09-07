@@ -202,12 +202,30 @@ export const sumInTransform = _sum_in => {
     info.push(num12);
     info.push(num13);
 
- 
+
 
 
 
     yearItem.info[0].children.children.forEach(eachClass => {
       switch (eachClass.prop) {
+        case '企业经营管理人员':
+          let n14Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '出资人代表');
+          });
+          if (n14Enterprise) num14 = n14Enterprise.num;
+          let n15Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '经营管理人员');
+          });
+          if (n15Enterprise) num15 = n15Enterprise.num;
+          let n16Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '党群工作者');
+          });
+          if (n16Enterprise) num16 = n16Enterprise.num;
+          let n17Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '其他');
+          });
+          if (n17Enterprise) num17 = n17Enterprise.num;
+          break;
         case '管理人员':
           let n14 = eachClass.children[4].value.find(eachTwoClass => {
             return (eachTwoClass.cas[0] === '省部级');
@@ -835,7 +853,7 @@ export const sumInTransform = _sum_in => {
     info.push(num116);
 
     info.push(num117);
-    
+
     info.push(num118);
     info.push(num119);
     info.push(num120);
@@ -846,9 +864,9 @@ export const sumInTransform = _sum_in => {
     info.push(num125);
     info.push(num126);
     info.push(num127);
-    
-    
-    
+
+
+
     obj.info = info;
 
     transformSumIn.push(obj)
