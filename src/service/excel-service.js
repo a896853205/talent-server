@@ -19,7 +19,7 @@ export async function generateExcel(data, excelName) {
   switch (data._basic[4].value) {
     case '机关':
       readPath = pathHelper.generateReadPath('单位问卷—机关—打印版');
-      console.log(transformData._sum_out[0].info[127]);
+      console.log('test...',transformData._sum_out[0].info[127]);
       sourceData = [
         data._basic,
         transformData._summary,

@@ -189,12 +189,8 @@ export const sumOutTransform = _sum_out => {
       num127 += eachDataStructure.children[3].children[9].value;
 
       //先把所有的离职原因拼接到一个数组中
-      let eachDataStructureLeaveReasons = eachDataStructure.children[5].value;
-      eachDataStructureLeaveReasons.forEach(reasonItem => {
-        arr128.push(reasonItem)
-      })
-
-      
+      let newArr128 = arr128.concat(eachDataStructure.children[5].value)
+      arr128 = newArr128;
     });
 
 
@@ -856,7 +852,50 @@ export const sumOutTransform = _sum_out => {
     info.push(num126);
     info.push(num127);
 
-    
+    let newSetArr128 = new Set(arr128);
+    let arr = new Array(12)
+    let obj2 = { '离职原因（多选）': arr }
+    newSetArr128.forEach(item => {
+      switch (item) {
+        case '气候环境恶劣':
+          obj2['离职原因（多选）'][0] = item;
+          break;
+        case '房价高':
+          obj2['离职原因（多选）'][1] = item;
+          break;
+        case '公共服务效率低':
+          obj2['离职原因（多选）'][2] = item;
+          break;
+        case '医疗资源不满意':
+          obj2['离职原因（多选）'][3] = item;
+          break;
+        case '教育资源不满意':
+          obj2['离职原因（多选）'][4] = item;
+          break;
+        case '赡养老人压力大':
+          obj2['离职原因（多选）'][5] = item;
+          break;
+        case '收入低':
+          obj2['离职原因（多选）'][6] = item;
+          break;
+        case '工作环境不满意':
+          obj2['离职原因（多选）'][7] = item;
+          break;
+        case '与同事关系相处不融洽':
+          obj2['离职原因（多选）'][8] = item;
+          break;
+        case '所在单位发展前景差':
+          obj2['离职原因（多选）'][9] = item;
+          break;
+        case '个人晋升空间窄':
+          obj2['离职原因（多选）'][10] = item;
+          break;
+        case '其他':
+          obj2['离职原因（多选）'][11] = item;
+          break;
+      }
+    });
+    info.push(obj2);
     obj.info = info;
 
     transformSumOut.push(obj)
