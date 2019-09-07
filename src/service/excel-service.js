@@ -31,8 +31,14 @@ export async function generateExcel(data, excelName) {
       break;
     case '社会团体':
       readPath = pathHelper.generateReadPath('单位问卷—社会团体—打印版');
+      console.log('test...',transformData._out_status[0]);
       sourceData = [
-
+        data._basic,
+        transformData._summary,
+        transformData._sum_in,
+        transformData._sum_out,
+        transformData._out_status,
+        transformData._need,
       ]
       break;
     case '事业单位':

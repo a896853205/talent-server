@@ -28,16 +28,22 @@ export const transform = form => {
     case '机关':
       // 非事业单位调用非事业单位的处理函数
       // summary数据处理
-      _summary = summaryTransform(form._summary);
-      _sum_in = sumInTransform(form._sum_in);
-      _sum_out = sumOutTransform(form._sum_out);
+      let fromTable1 = '机关';
+      _summary = summaryTransform(form._summary, fromTable1);
+      _sum_in = sumInTransform(form._sum_in, fromTable1);
+      _sum_out = sumOutTransform(form._sum_out, fromTable1);
       _out_status = outStatusTransform(form._out_status);
       _need = needTransform(form._need);
       break;
     case '社会团体':
       // 非事业单位调用非事业单位的处理函数
       // summary数据处理
-      //  _summary = summaryTransform(form._summary);
+      let fromTable2 = '社会团体';
+      _summary = summaryTransform(form._summary, fromTable2);
+      _sum_in = sumInTransform(form._sum_in, fromTable2);
+      _sum_out = sumOutTransform(form._sum_out, fromTable2);
+      _out_status = outStatusTransform(form._out_status);
+      _need = needTransform(form._need);
       break;
     case '事业单位':
       // 进行编制内编制外的处理函数
@@ -47,7 +53,7 @@ export const transform = form => {
     default:
       // 非事业单位调用非事业单位的处理函数
       // summary数据处理
-      _summary = summaryTransform(form._summary);
+      _summary = summaryTransform(form._summary, '企业');
       _sum_in = sumInTransform(form._sum_in);
       _sum_out = sumOutTransform(form._sum_out);
       _out_status = outStatusTransform(form._out_status);
