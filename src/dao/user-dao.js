@@ -173,7 +173,7 @@ export const userDao = {
   submitManage: async userId => {
     let collections = await db.get('company_users');
 
-    collections.update({ _id: userId }, { _submit_status: 1 });
+    collections.update({ _id: userId },{ "$set": { _submit_status: 1 } });
   },
 
   // 删除用户
