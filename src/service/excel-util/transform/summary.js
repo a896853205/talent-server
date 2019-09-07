@@ -248,7 +248,8 @@ export const summaryTransform = (_summary, fromTable) => {
           if (n17Enterprise) num17 = n17Enterprise.num;
           break;
         case '管理人员':
-          if (fromTable === '社会团体') {
+          //社会团体的管理类别与事业单位的管理类别一样  所以都会进入这个判断
+          if (fromTable === '社会团体') {   
             let n129 = eachClass.children[4].value.find(eachTwoClass => {
               return (eachTwoClass.cas[0] === '一级');
             });
