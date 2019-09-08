@@ -19,7 +19,7 @@ export async function generateExcel(data, excelName) {
   switch (data._basic[4].value) {
     case '机关':
       readPath = pathHelper.generateReadPath('单位问卷—机关—打印版');
-      console.log('test...',transformData._sum_out[0].info[127]);
+      console.log('test...', transformData._sum_out[0].info[127]);
       sourceData = [
         data._basic,
         transformData._summary,
@@ -32,19 +32,40 @@ export async function generateExcel(data, excelName) {
     case '社会团体及民办非企业单位':
       readPath = pathHelper.generateReadPath('单位问卷—社会团体及民办非企业单位—打印版');
       sourceData = [
-
+        data._basic,
+        transformData._summary,
+        transformData._sum_in,
+        transformData._sum_out,
+        transformData._out_status,
+        transformData._need,
       ]
       break;
     case '事业单位':
+      console.log('test...', transformData._summary_nei[0].info[0]);
       readPath = pathHelper.generateReadPath('单位问卷—事业单位—打印版');
       sourceData = [
-
+        data._basic,
+        transformData._summary_nei,
+        transformData._summary_wai,
+        transformData._sum_in_nei,
+        transformData._sum_in_wai,
+        transformData._sum_out_nei,
+        transformData._sum_out_wai,
+        transformData._out_status_nei,
+        transformData._out_status_wai,
+        transformData._need_nei,
+        transformData._need_wai,
       ]
       break;
     default:
       readPath = pathHelper.generateReadPath('单位问卷—企业—打印版');
       sourceData = [
-
+        data._basic,
+        transformData._summary,
+        transformData._sum_in,
+        transformData._sum_out,
+        transformData._out_status,
+        transformData._need,
       ]
   }
 

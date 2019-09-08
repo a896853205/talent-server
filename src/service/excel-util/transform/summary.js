@@ -1,4 +1,4 @@
-export const summaryTransform = _summary => {
+export const summaryTransform = (_summary, fromTable) => {
   // 这里是转换_summary的数据结构的
   let transformSummary = [];
 
@@ -10,6 +10,9 @@ export const summaryTransform = _summary => {
 
     //职工人数
     let num1 = yearItem.info[0].value; // 职工人数
+
+
+
     info.push(num1);
 
     // 性别结构
@@ -34,6 +37,8 @@ export const summaryTransform = _summary => {
     let num15 = 0;
     let num16 = 0;
     let num17 = 0;
+
+
     let num18 = 0;
     let num19 = 0;
 
@@ -158,6 +163,22 @@ export const summaryTransform = _summary => {
     let num126 = 0; //15000-20000
     let num127 = 0; //20000以上
 
+    //当年年度产值（万元）
+    let num128 = yearItem.info[1].value;
+
+    //社会团体 管理人员
+    let num129 = 0;  // 一级
+    let num130 = 0;  // 二级
+    let num131 = 0;  // 三级
+    let num132 = 0;  // 四级
+    let num133 = 0;  // 五级
+    let num134 = 0;  // 六级
+    let num135 = 0;  // 七级
+    let num136 = 0;  // 八级
+    let num137 = 0;  // 九级
+    let num138 = 0;  // 十级
+    let num139 = 0;  // 其他
+
     yearItem.info[0].children.children.forEach(element => {
       let eachDataStructure = element;
 
@@ -208,32 +229,100 @@ export const summaryTransform = _summary => {
     // })
     yearItem.info[0].children.children.forEach(eachClass => {
       switch (eachClass.prop) {
-        case '管理人员':
-          let n14 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '省部级');
+        case '企业经营管理人员':
+          let n14Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '出资人代表');
           });
-          if (n14) num14 = n14.num;
-          let n15 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '厅局级');
+          if (n14Enterprise) num14 = n14Enterprise.num;
+          let n15Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '经营管理人员');
           });
-          if (n15) num15 = n15.num;
-          let n16 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '县处级');
+          if (n15Enterprise) num15 = n15Enterprise.num;
+          let n16Enterprise = eachClass.children[4].value.find(eachTwoClass => {
+            return (eachTwoClass.cas[0] === '党群工作者');
           });
-          if (n16) num16 = n16.num;
-          let n17 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '乡科级');
-          });
-          if (n17) num17 = n17.num;
-          let n18 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '科员');
-          });
-          if (n18) num18 = n18.num;
-          let n19 = eachClass.children[4].value.find(eachTwoClass => {
+          if (n16Enterprise) num16 = n16Enterprise.num;
+          let n17Enterprise = eachClass.children[4].value.find(eachTwoClass => {
             return (eachTwoClass.cas[0] === '其他');
           });
-          if (n19) num19 = n19.num;
+          if (n17Enterprise) num17 = n17Enterprise.num;
           break;
+        case '管理人员':
+          //社会团体的管理类别与事业单位的管理类别一样  所以都会进入这个判断
+          if (fromTable === '社会团体') {   
+            let n129 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '一级');
+            });
+            if (n129) num129 = n129.num;
+            let n130 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '二级');
+            });
+            if (n130) num130 = n130.num;
+            let n131 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '三级');
+            });
+            if (n131) num131 = n131.num;
+            let n132 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '四级');
+            });
+            if (n132) num132 = n132.num;
+            let n133 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '五级');
+            });
+            if (n133) num133 = n133.num;
+            let n134 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '六级');
+            });
+            if (n134) num134 = n134.num;
+            let n135 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '七级');
+            });
+            if (n135) num135 = n135.num;
+            let n136 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '八级');
+            });
+            if (n136) num136 = n136.num;
+            let n137 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '九级');
+            });
+            if (n137) num137 = n137.num;
+            let n138 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '十级');
+            });
+            if (n138) num138 = n138.num;
+            let n139 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '其他');
+            });
+            if (n139) num139 = n139.num;
+            break;
+          } else if(fromTable === '机关'){
+            let n14 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '省部级');
+            });
+            if (n14) num14 = n14.num;
+            let n15 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '厅局级');
+            });
+            if (n15) num15 = n15.num;
+            let n16 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '县处级');
+            });
+            if (n16) num16 = n16.num;
+            let n17 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '乡科级');
+            });
+            if (n17) num17 = n17.num;
+            let n18 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '科员');
+            });
+            if (n18) num18 = n18.num;
+            let n19 = eachClass.children[4].value.find(eachTwoClass => {
+              return (eachTwoClass.cas[0] === '其他');
+            });
+            if (n19) num19 = n19.num;
+            break;
+          }
+
         case '专业技术人员':
           // 工程技术人员 20-24
           let n20_24 = eachClass.children[4].value.find(eachTwoClass => {
@@ -835,7 +924,7 @@ export const summaryTransform = _summary => {
     info.push(num116);
 
     info.push(num117);
-    
+
     info.push(num118);
     info.push(num119);
     info.push(num120);
@@ -846,7 +935,20 @@ export const summaryTransform = _summary => {
     info.push(num125);
     info.push(num126);
     info.push(num127);
+    info.push(num128);
 
+
+    info.push(num129);
+    info.push(num130);
+    info.push(num131);
+    info.push(num132);
+    info.push(num133);
+    info.push(num134);
+    info.push(num135);
+    info.push(num136);
+    info.push(num137);
+    info.push(num138);
+    info.push(num139);
 
 
     obj.info = info;
