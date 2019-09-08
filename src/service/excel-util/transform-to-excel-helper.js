@@ -34,7 +34,7 @@ export const transform = form => {
       _out_status = outStatusTransform(form._out_status);
       _need = needTransform(form._need);
       break;
-    case '社会团体':
+    case '社会团体及民办非企业单位':
       // 非事业单位调用非事业单位的处理函数
       // summary数据处理
       //  _summary = summaryTransform(form._summary);

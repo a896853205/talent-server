@@ -29,8 +29,8 @@ export async function generateExcel(data, excelName) {
         transformData._need,
       ]
       break;
-    case '社会团体':
-      readPath = pathHelper.generateReadPath('单位问卷—社会团体—打印版');
+    case '社会团体及民办非企业单位':
+      readPath = pathHelper.generateReadPath('单位问卷—社会团体及民办非企业单位—打印版');
       sourceData = [
 
       ]

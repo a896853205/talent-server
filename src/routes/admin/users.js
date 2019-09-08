@@ -42,35 +42,46 @@ router.post('/manageInfo', async ctx => {
   let subUserArr = [];
 
   let user = await userDao.selectByUserId(userId);
-  subUserArr = await userDao.querySubUser(user._user_code);
+
+  if (user) {
+    subUserArr = await userDao.querySubUser(user._user_code);
+  }
+  
   // 添加上问卷提交状态属性
   for (let subUser of subUserArr) {
     // 获取每个子用户表单提交状态
     let subForm = await formDao.getCompanyForm(subUser._id);
 
-    if (!subForm || !subForm._confirmed) {
-      subUser._confirmed = 0;
+    if (subUser._user_role === 1) {
+      subUser._confirmed = -1;
     } else {
-      subUser._confirmed = 1;
+      if (!subForm || !subForm._confirmed) {
+        subUser._confirmed = 0;
+      } else {
+        subUser._confirmed = 1;
+      }
     }
+
     // 查询他们的子集
-    let subSubmitMum = 0;
-    let subSubNum = 0;
-    let subSubUser = await userDao.querySubUser(subUser._user_code);
-    // if (subSubUser) {
-    //   subSubNum = subSubUser.length;
+    // let subSubmitMum = 0;
+    // let subSubNum = 0;
+    // let subSubUser = await userDao.querySubUser(subUser._user_code);
+    // // if (subSubUser) {
+    // //   subSubNum = subSubUser.length;
+    // // }
+    // for (let subsubItem of subSubUser) {
+    //   if (subsubItem._submit_status === 1) {
+    //     subSubmitMum ++;
+    //   }
+
+    //   if (subsubItem._user_role !== 0) {
+    //     subSubNum++;
+    //   }
     // }
-    for (let subsubItem of subSubUser) {
-      if (subsubItem._submit_status === 1) {
-        subSubmitMum ++;
-      }
 
-      if (subsubItem._user_role !== 0) {
-        subSubNum++;
-      }
-    }
-
-    subUser._sub_submit_status = `${subSubmitMum} / ${subSubNum}`;
+    // subUser._sub_submit_status = `${subSubmitMum} / ${subSubNum}`;
+    // 去掉了看下两级别的数据
+    subUser._sub_submit_status = '';
   }
 
   ctx.body = new Result({
