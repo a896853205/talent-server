@@ -249,7 +249,7 @@ export const summaryTransform = (_summary, fromTable) => {
           break;
         case '管理人员':
           //社会团体的管理类别与事业单位的管理类别一样  所以都会进入这个判断
-          if (fromTable === '社会团体') {   
+          if (fromTable === '社会团体') {
             let n129 = eachClass.children[4].value.find(eachTwoClass => {
               return (eachTwoClass.cas[0] === '一级');
             });
@@ -295,7 +295,7 @@ export const summaryTransform = (_summary, fromTable) => {
             });
             if (n139) num139 = n139.num;
             break;
-          } else if(fromTable === '机关'){
+          } else if (fromTable === '机关') {
             let n14 = eachClass.children[4].value.find(eachTwoClass => {
               return (eachTwoClass.cas[0] === '省部级');
             });
@@ -795,15 +795,14 @@ export const summaryTransform = (_summary, fromTable) => {
           });
           if (n115) num115 = n115.num;
 
-          let n116 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '社会工作人员');
-          });
-          if (n116) num116 = n116.num;
+          break;
+        case '社会工作人员':
 
+          num116 = yearItem.info[0].children.inputChildren[4].value;
           break;
         case '其他':
 
-          num117 = yearItem.info[0].children.inputChildren[4].value;
+          num117 = yearItem.info[0].children.inputChildren[5].value;
           break;
       }
     })

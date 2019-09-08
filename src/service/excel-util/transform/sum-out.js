@@ -790,15 +790,14 @@ export const sumOutTransform = (_sum_out, fromTable) => {
           });
           if (n115) num115 = n115.num;
 
-          let n116 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '社会工作人员');
-          });
-          if (n116) num116 = n116.num;
+          break;
+        case '社会工作人员':
 
+          num116 = yearItem.info[0].children.inputChildren[4].value;
           break;
         case '其他':
 
-          num117 = yearItem.info[0].children.inputChildren[4].value;
+          num117 = yearItem.info[0].children.inputChildren[5].value;
           break;
       }
     })
@@ -975,7 +974,7 @@ export const sumOutTransform = (_sum_out, fromTable) => {
       }
     });
     info.push(obj2); //离职原因
-    
+
     info.push(num129);
     info.push(num130);
     info.push(num131);
