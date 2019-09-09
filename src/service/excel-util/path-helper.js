@@ -12,3 +12,5 @@ pathHelper.generateWritePath = (userId) => {
 
 pathHelper.downLoadPath = () => path.join(__dirname, '../../resources/excel-generate/')
 
+pathHelper.downLoadFaqPath = () => path.join(__dirname, '../../resources/excel-model/')
+
