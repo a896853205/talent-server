@@ -14,6 +14,9 @@ router.post('/companyFormSave', async (ctx, next) => {
   let { form, userId } = ctx.request.body,
       returnForm = await formDao.getCompanyForm(userId);
 
+  // 添加日志看看谁是小坏蛋
+  console.log(userId);
+  console.log(new Date());
   // 当数据库没有数据时插入,有数据时进行更新操作.
   if (returnForm) {
     formDao.companyFormSave(form);
