@@ -2,7 +2,7 @@ export const summaryTransform = (_summary, fromTable) => {
   // 这里是转换_summary的数据结构的
   let transformSummary = [];
 
-  _summary = Array.from(_summary)
+  _summary = Array.from(_summary);
   for (let yearItem of _summary) {
     let obj = {};
     let info = [];
@@ -10,8 +10,6 @@ export const summaryTransform = (_summary, fromTable) => {
 
     //职工人数
     let num1 = yearItem.info[0].value; // 职工人数
-
-
 
     info.push(num1);
 
@@ -37,7 +35,6 @@ export const summaryTransform = (_summary, fromTable) => {
     let num15 = 0;
     let num16 = 0;
     let num17 = 0;
-
 
     let num18 = 0;
     let num19 = 0;
@@ -167,17 +164,17 @@ export const summaryTransform = (_summary, fromTable) => {
     let num128 = yearItem.info[1].value;
 
     //社会团体 管理人员
-    let num129 = 0;  // 一级
-    let num130 = 0;  // 二级
-    let num131 = 0;  // 三级
-    let num132 = 0;  // 四级
-    let num133 = 0;  // 五级
-    let num134 = 0;  // 六级
-    let num135 = 0;  // 七级
-    let num136 = 0;  // 八级
-    let num137 = 0;  // 九级
-    let num138 = 0;  // 十级
-    let num139 = 0;  // 其他
+    let num129 = 0; // 一级
+    let num130 = 0; // 二级
+    let num131 = 0; // 三级
+    let num132 = 0; // 四级
+    let num133 = 0; // 五级
+    let num134 = 0; // 六级
+    let num135 = 0; // 七级
+    let num136 = 0; // 八级
+    let num137 = 0; // 九级
+    let num138 = 0; // 十级
+    let num139 = 0; // 其他
 
     yearItem.info[0].children.children.forEach(element => {
       let eachDataStructure = element;
@@ -209,8 +206,6 @@ export const summaryTransform = (_summary, fromTable) => {
       num127 += eachDataStructure.children[3].children[9].value;
     });
 
-
-
     info.push(num2);
     info.push(num3);
     info.push(num4);
@@ -229,583 +224,937 @@ export const summaryTransform = (_summary, fromTable) => {
     // })
     yearItem.info[0].children.children.forEach(eachClass => {
       switch (eachClass.prop) {
-        case '企业经营管理人员':
+        case "企业经营管理人员":
           let n14Enterprise = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '出资人代表');
+            return eachTwoClass.cas[0] === "出资人代表";
           });
           if (n14Enterprise) num14 = n14Enterprise.num;
           let n15Enterprise = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '经营管理人员');
+            return eachTwoClass.cas[0] === "经营管理人员";
           });
           if (n15Enterprise) num15 = n15Enterprise.num;
           let n16Enterprise = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '党群工作者');
+            return eachTwoClass.cas[0] === "党群工作者";
           });
           if (n16Enterprise) num16 = n16Enterprise.num;
           let n17Enterprise = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '其他');
+            return eachTwoClass.cas[0] === "其他";
           });
           if (n17Enterprise) num17 = n17Enterprise.num;
           break;
-        case '管理人员':
+        case "管理人员":
           //社会团体的管理类别与事业单位的管理类别一样  所以都会进入这个判断
-          if (fromTable === '社会团体') {
+          if (fromTable === "社会团体") {
             let n129 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '一级');
+              return eachTwoClass.cas[0] === "一级";
             });
             if (n129) num129 = n129.num;
             let n130 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '二级');
+              return eachTwoClass.cas[0] === "二级";
             });
             if (n130) num130 = n130.num;
             let n131 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '三级');
+              return eachTwoClass.cas[0] === "三级";
             });
             if (n131) num131 = n131.num;
             let n132 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '四级');
+              return eachTwoClass.cas[0] === "四级";
             });
             if (n132) num132 = n132.num;
             let n133 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '五级');
+              return eachTwoClass.cas[0] === "五级";
             });
             if (n133) num133 = n133.num;
             let n134 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '六级');
+              return eachTwoClass.cas[0] === "六级";
             });
             if (n134) num134 = n134.num;
             let n135 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '七级');
+              return eachTwoClass.cas[0] === "七级";
             });
             if (n135) num135 = n135.num;
             let n136 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '八级');
+              return eachTwoClass.cas[0] === "八级";
             });
             if (n136) num136 = n136.num;
             let n137 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '九级');
+              return eachTwoClass.cas[0] === "九级";
             });
             if (n137) num137 = n137.num;
             let n138 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '十级');
+              return eachTwoClass.cas[0] === "十级";
             });
             if (n138) num138 = n138.num;
             let n139 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '其他');
+              return eachTwoClass.cas[0] === "其他";
             });
             if (n139) num139 = n139.num;
             break;
-          } else if (fromTable === '机关') {
+          } else if (fromTable === "机关") {
             let n14 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '省部级');
+              return eachTwoClass.cas[0] === "省部级";
             });
             if (n14) num14 = n14.num;
             let n15 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '厅局级');
+              return eachTwoClass.cas[0] === "厅局级";
             });
             if (n15) num15 = n15.num;
             let n16 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '县处级');
+              return eachTwoClass.cas[0] === "县处级";
             });
             if (n16) num16 = n16.num;
             let n17 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '乡科级');
+              return eachTwoClass.cas[0] === "乡科级";
             });
             if (n17) num17 = n17.num;
             let n18 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '科员');
+              return eachTwoClass.cas[0] === "科员";
             });
             if (n18) num18 = n18.num;
             let n19 = eachClass.children[4].value.find(eachTwoClass => {
-              return (eachTwoClass.cas[0] === '其他');
+              return eachTwoClass.cas[0] === "其他";
             });
             if (n19) num19 = n19.num;
             break;
           }
 
-        case '专业技术人员':
+        case "专业技术人员":
           // 工程技术人员 20-24
-          let n20_24 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '工程技术人员');
+          let n20_24 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "工程技术人员";
           });
           // 农业技术人员 25-29
-          let n25_29 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '农业技术人员');
+          let n25_29 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "农业技术人员";
           });
           // 科学研究人员 30-34
-          let n30_34 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '科学研究人员');
+          let n30_34 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "科学研究人员";
           });
           // 卫生技术人员 35-39
-          let n35_39 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '卫生技术人员');
+          let n35_39 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "卫生技术人员";
           });
           // 教学人员 40-44
-          let n40_44 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '教学人员');
+          let n40_44 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "教学人员";
           });
           // 经济人员 45-49
-          let n45_49 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '经济人员');
+          let n45_49 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "经济人员";
           });
           // 会计人员 50-54
-          let n50_54 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '会计人员');
+          let n50_54 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "会计人员";
           });
           // 统计人员 55-59
-          let n55_59 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '统计人员');
+          let n55_59 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "统计人员";
           });
           // 翻译人员 60-64
-          let n60_64 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '翻译人员');
+          let n60_64 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "翻译人员";
           });
           // 图书档案、文博人员 65-69
-          let n65_69 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '图书档案、文博人员');
+          let n65_69 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "图书档案、文博人员";
           });
           // 新闻、出版人员 70-74
-          let n70_74 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '新闻、出版人员');
+          let n70_74 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "新闻、出版人员";
           });
           // 律师、公证人员 75-79
-          let n75_79 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '律师、公证人员');
+          let n75_79 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "律师、公证人员";
           });
           // 播音人员 80-84
-          let n80_84 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '播音人员');
+          let n80_84 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "播音人员";
           });
           // 工艺美术人员 85-89
-          let n85_89 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '工艺美术人员');
+          let n85_89 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "工艺美术人员";
           });
           // 体育人员 90-94
-          let n90_94 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '体育人员');
+          let n90_94 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "体育人员";
           });
           // 艺术人员 95-99
-          let n95_99 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '艺术人员');
+          let n95_99 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "艺术人员";
           });
           // 其他人员 100-104
-          let n100_104 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '其他人员');
+          let n100_104 = eachClass.children[4].value.filter(eachTwoClass => {
+            return eachTwoClass.cas[0] === "其他人员";
           });
 
           if (n20_24) {
-            switch (n20_24.cas[1]) {
-              case '正高级':
-                num20 = n20_24.num;
-                break;
-              case '副高级':
-                num21 = n20_24.num;
-                break;
-              case '中级':
-                num22 = n20_24.num;
-                break;
-              case '初级':
-                num23 = n20_24.num;
-                break;
-              case '无':
-                num24 = n20_24.num;
-                break;
-            }
+            n20_24.forEach(item => {
+              switch (item.cas[1]) {
+                case "正高级":
+                  num20 = item.num;
+                  break;
+                case "副高级":
+                  num21 = item.num;
+                  break;
+                case "中级":
+                  num22 = item.num;
+                  break;
+                case "初级":
+                  num23 = item.num;
+                  break;
+                case "无":
+                  num24 = item.num;
+                  break;
+              }
+            });
           }
+
+          // if (n20_24) {
+          //   console.log('aaaaaaaaa',n20_24);
+          //   switch (n20_24.cas[1]) {
+          //     case '正高级':
+          //       num20 = n20_24.num;
+          //       break;
+          //     case '副高级':
+          //       num21 = n20_24.num;
+          //       break;
+          //     case '中级':
+          //       num22 = n20_24.num;
+          //       break;
+          //     case '初级':
+          //       num23 = n20_24.num;
+          //       break;
+          //     case '无':
+          //       num24 = n20_24.num;
+          //       break;
+          //   }
+          // }
 
           if (n25_29) {
-            switch (n25_29.cas[1]) {
-              case '正高级':
-                num25 = n25_29.num;
-                break;
-              case '副高级':
-                num26 = n25_29.num;
-                break;
-              case '中级':
-                num27 = n25_29.num;
-                break;
-              case '初级':
-                num28 = n25_29.num;
-                break;
-              case '无':
-                num29 = n25_29.num;
-                break;
-            }
+            n25_29.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num25 = item.num;
+                    break;
+                  case "副高级":
+                    num26 = item.num;
+                    break;
+                  case "中级":
+                    num27 = item.num;
+                    break;
+                  case "初级":
+                    num28 = item.num;
+                    break;
+                  case "无":
+                    num29 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n25_29) {
+          //   switch (n25_29.cas[1]) {
+          //     case "正高级":
+          //       num25 = n25_29.num;
+          //       break;
+          //     case "副高级":
+          //       num26 = n25_29.num;
+          //       break;
+          //     case "中级":
+          //       num27 = n25_29.num;
+          //       break;
+          //     case "初级":
+          //       num28 = n25_29.num;
+          //       break;
+          //     case "无":
+          //       num29 = n25_29.num;
+          //       break;
+          //   }
+          // }
 
           if (n30_34) {
-            switch (n30_34.cas[1]) {
-              case '正高级':
-                num30 = n30_34.num;
-                break;
-              case '副高级':
-                num31 = n30_34.num;
-                break;
-              case '中级':
-                num32 = n30_34.num;
-                break;
-              case '初级':
-                num33 = n30_34.num;
-                break;
-              case '无':
-                num34 = n30_34.num;
-                break;
-            }
+            n30_34.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num30 = item.num;
+                    break;
+                  case "副高级":
+                    num31 = item.num;
+                    break;
+                  case "中级":
+                    num32 = item.num;
+                    break;
+                  case "初级":
+                    num33 = item.num;
+                    break;
+                  case "无":
+                    num34 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n30_34) {
+          //   switch (n30_34.cas[1]) {
+          //     case "正高级":
+          //       num30 = n30_34.num;
+          //       break;
+          //     case "副高级":
+          //       num31 = n30_34.num;
+          //       break;
+          //     case "中级":
+          //       num32 = n30_34.num;
+          //       break;
+          //     case "初级":
+          //       num33 = n30_34.num;
+          //       break;
+          //     case "无":
+          //       num34 = n30_34.num;
+          //       break;
+          //   }
+          // }
 
           if (n35_39) {
-            switch (n35_39.cas[1]) {
-              case '正高级':
-                num35 = n35_39.num;
-                break;
-              case '副高级':
-                num36 = n35_39.num;
-                break;
-              case '中级':
-                num37 = n35_39.num;
-                break;
-              case '初级':
-                num38 = n35_39.num;
-                break;
-              case '无':
-                num39 = n35_39.num;
-                break;
-            }
+            n35_39.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num35 = item.num;
+                    break;
+                  case "副高级":
+                    num36 = item.num;
+                    break;
+                  case "中级":
+                    num37 = item.num;
+                    break;
+                  case "初级":
+                    num38 = item.num;
+                    break;
+                  case "无":
+                    num39 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n35_39) {
+          //   switch (n35_39.cas[1]) {
+          //     case "正高级":
+          //       num35 = n35_39.num;
+          //       break;
+          //     case "副高级":
+          //       num36 = n35_39.num;
+          //       break;
+          //     case "中级":
+          //       num37 = n35_39.num;
+          //       break;
+          //     case "初级":
+          //       num38 = n35_39.num;
+          //       break;
+          //     case "无":
+          //       num39 = n35_39.num;
+          //       break;
+          //   }
+          // }
 
           if (n40_44) {
-            switch (n40_44.cas[1]) {
-              case '正高级':
-                num40 = n40_44.num;
-                break;
-              case '副高级':
-                num41 = n40_44.num;
-                break;
-              case '中级':
-                num42 = n40_44.num;
-                break;
-              case '初级':
-                num43 = n40_44.num;
-                break;
-              case '无':
-                num44 = n40_44.num;
-                break;
-            }
+            n40_44.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num40 = item.num;
+                    break;
+                  case "副高级":
+                    num41 = item.num;
+                    break;
+                  case "中级":
+                    num42 = item.num;
+                    break;
+                  case "初级":
+                    num43 = item.num;
+                    break;
+                  case "无":
+                    num44 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n40_44) {
+          //   switch (n40_44.cas[1]) {
+          //     case "正高级":
+          //       num40 = n40_44.num;
+          //       break;
+          //     case "副高级":
+          //       num41 = n40_44.num;
+          //       break;
+          //     case "中级":
+          //       num42 = n40_44.num;
+          //       break;
+          //     case "初级":
+          //       num43 = n40_44.num;
+          //       break;
+          //     case "无":
+          //       num44 = n40_44.num;
+          //       break;
+          //   }
+          // }
 
           if (n45_49) {
-            switch (n45_49.cas[1]) {
-              case '正高级':
-                num45 = n45_49.num;
-                break;
-              case '副高级':
-                num46 = n45_49.num;
-                break;
-              case '中级':
-                num47 = n45_49.num;
-                break;
-              case '初级':
-                num48 = n45_49.num;
-                break;
-              case '无':
-                num49 = n45_49.num;
-                break;
-            }
+            n45_49.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num45 = item.num;
+                    break;
+                  case "副高级":
+                    num46 = item.num;
+                    break;
+                  case "中级":
+                    num47 = item.num;
+                    break;
+                  case "初级":
+                    num48 = item.num;
+                    break;
+                  case "无":
+                    num49 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n45_49) {
+          //   switch (n45_49.cas[1]) {
+          //     case "正高级":
+          //       num45 = n45_49.num;
+          //       break;
+          //     case "副高级":
+          //       num46 = n45_49.num;
+          //       break;
+          //     case "中级":
+          //       num47 = n45_49.num;
+          //       break;
+          //     case "初级":
+          //       num48 = n45_49.num;
+          //       break;
+          //     case "无":
+          //       num49 = n45_49.num;
+          //       break;
+          //   }
+          // }
 
           if (n50_54) {
-            switch (n50_54.cas[1]) {
-              case '正高级':
-                num50 = n50_54.num;
-                break;
-              case '副高级':
-                num51 = n50_54.num;
-                break;
-              case '中级':
-                num52 = n50_54.num;
-                break;
-              case '初级':
-                num53 = n50_54.num;
-                break;
-              case '无':
-                num54 = n50_54.num;
-                break;
-            }
+            n50_54.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num50 = item.num;
+                    break;
+                  case "副高级":
+                    num51 = item.num;
+                    break;
+                  case "中级":
+                    num52 = item.num;
+                    break;
+                  case "初级":
+                    num53 = item.num;
+                    break;
+                  case "无":
+                    num54 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n50_54) {
+          //   switch (n50_54.cas[1]) {
+          //     case "正高级":
+          //       num50 = n50_54.num;
+          //       break;
+          //     case "副高级":
+          //       num51 = n50_54.num;
+          //       break;
+          //     case "中级":
+          //       num52 = n50_54.num;
+          //       break;
+          //     case "初级":
+          //       num53 = n50_54.num;
+          //       break;
+          //     case "无":
+          //       num54 = n50_54.num;
+          //       break;
+          //   }
+          // }
 
           if (n55_59) {
-            switch (n55_59.cas[1]) {
-              case '正高级':
-                num55 = n55_59.num;
-                break;
-              case '副高级':
-                num56 = n55_59.num;
-                break;
-              case '中级':
-                num57 = n55_59.num;
-                break;
-              case '初级':
-                num58 = n55_59.num;
-                break;
-              case '无':
-                num59 = n55_59.num;
-                break;
-            }
+            n55_59.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num55 = item.num;
+                    break;
+                  case "副高级":
+                    num56 = item.num;
+                    break;
+                  case "中级":
+                    num57 = item.num;
+                    break;
+                  case "初级":
+                    num58 = item.num;
+                    break;
+                  case "无":
+                    num59 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n55_59) {
+          //   switch (n55_59.cas[1]) {
+          //     case "正高级":
+          //       num55 = n55_59.num;
+          //       break;
+          //     case "副高级":
+          //       num56 = n55_59.num;
+          //       break;
+          //     case "中级":
+          //       num57 = n55_59.num;
+          //       break;
+          //     case "初级":
+          //       num58 = n55_59.num;
+          //       break;
+          //     case "无":
+          //       num59 = n55_59.num;
+          //       break;
+          //   }
+          // }
 
           if (n60_64) {
-            switch (n60_64.cas[1]) {
-              case '正高级':
-                num60 = n60_64.num;
-                break;
-              case '副高级':
-                num61 = n60_64.num;
-                break;
-              case '中级':
-                num62 = n60_64.num;
-                break;
-              case '初级':
-                num63 = n60_64.num;
-                break;
-              case '无':
-                num64 = n60_64.num;
-                break;
-            }
+            n60_64.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num60 = item.num;
+                    break;
+                  case "副高级":
+                    num61 = item.num;
+                    break;
+                  case "中级":
+                    num62 = item.num;
+                    break;
+                  case "初级":
+                    num63 = item.num;
+                    break;
+                  case "无":
+                    num64 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n60_64) {
+          //   switch (n60_64.cas[1]) {
+          //     case "正高级":
+          //       num60 = n60_64.num;
+          //       break;
+          //     case "副高级":
+          //       num61 = n60_64.num;
+          //       break;
+          //     case "中级":
+          //       num62 = n60_64.num;
+          //       break;
+          //     case "初级":
+          //       num63 = n60_64.num;
+          //       break;
+          //     case "无":
+          //       num64 = n60_64.num;
+          //       break;
+          //   }
+          // }
 
           if (n65_69) {
-            switch (n65_69.cas[1]) {
-              case '正高级':
-                num65 = n65_69.num;
-                break;
-              case '副高级':
-                num66 = n65_69.num;
-                break;
-              case '中级':
-                num67 = n65_69.num;
-                break;
-              case '初级':
-                num68 = n65_69.num;
-                break;
-              case '无':
-                num69 = n65_69.num;
-                break;
-            }
+            n65_69.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num65 = item.num;
+                    break;
+                  case "副高级":
+                    num66 = item.num;
+                    break;
+                  case "中级":
+                    num67 = item.num;
+                    break;
+                  case "初级":
+                    num68 = item.num;
+                    break;
+                  case "无":
+                    num69 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n65_69) {
+          //   switch (n65_69.cas[1]) {
+          //     case "正高级":
+          //       num65 = n65_69.num;
+          //       break;
+          //     case "副高级":
+          //       num66 = n65_69.num;
+          //       break;
+          //     case "中级":
+          //       num67 = n65_69.num;
+          //       break;
+          //     case "初级":
+          //       num68 = n65_69.num;
+          //       break;
+          //     case "无":
+          //       num69 = n65_69.num;
+          //       break;
+          //   }
+          // }
 
           if (n70_74) {
-            switch (n70_74.cas[1]) {
-              case '正高级':
-                num70 = n70_74.num;
-                break;
-              case '副高级':
-                num71 = n70_74.num;
-                break;
-              case '中级':
-                num72 = n70_74.num;
-                break;
-              case '初级':
-                num73 = n70_74.num;
-                break;
-              case '无':
-                num74 = n70_74.num;
-                break;
-            }
+            n70_74.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num70 = item.num;
+                    break;
+                  case "副高级":
+                    num71 = item.num;
+                    break;
+                  case "中级":
+                    num72 = item.num;
+                    break;
+                  case "初级":
+                    num73 = item.num;
+                    break;
+                  case "无":
+                    num74 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n70_74) {
+          //   switch (n70_74.cas[1]) {
+          //     case "正高级":
+          //       num70 = n70_74.num;
+          //       break;
+          //     case "副高级":
+          //       num71 = n70_74.num;
+          //       break;
+          //     case "中级":
+          //       num72 = n70_74.num;
+          //       break;
+          //     case "初级":
+          //       num73 = n70_74.num;
+          //       break;
+          //     case "无":
+          //       num74 = n70_74.num;
+          //       break;
+          //   }
+          // }
 
           if (n75_79) {
-            switch (n75_79.cas[1]) {
-              case '正高级':
-                num75 = n75_79.num;
-                break;
-              case '副高级':
-                num76 = n75_79.num;
-                break;
-              case '中级':
-                num77 = n75_79.num;
-                break;
-              case '初级':
-                num78 = n75_79.num;
-                break;
-              case '无':
-                num79 = n75_79.num;
-                break;
-            }
+            n75_79.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num75 = item.num;
+                    break;
+                  case "副高级":
+                    num76 = item.num;
+                    break;
+                  case "中级":
+                    num77 = item.num;
+                    break;
+                  case "初级":
+                    num78 = item.num;
+                    break;
+                  case "无":
+                    num79 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n75_79) {
+          //   switch (n75_79.cas[1]) {
+          //     case "正高级":
+          //       num75 = n75_79.num;
+          //       break;
+          //     case "副高级":
+          //       num76 = n75_79.num;
+          //       break;
+          //     case "中级":
+          //       num77 = n75_79.num;
+          //       break;
+          //     case "初级":
+          //       num78 = n75_79.num;
+          //       break;
+          //     case "无":
+          //       num79 = n75_79.num;
+          //       break;
+          //   }
+          // }
 
           if (n80_84) {
-            switch (n80_84.cas[1]) {
-              case '正高级':
-                num80 = n80_84.num;
-                break;
-              case '副高级':
-                num81 = n80_84.num;
-                break;
-              case '中级':
-                num82 = n80_84.num;
-                break;
-              case '初级':
-                num83 = n80_84.num;
-                break;
-              case '无':
-                num84 = n80_84.num;
-                break;
-            }
+            n80_84.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num80 = item.num;
+                    break;
+                  case "副高级":
+                    num81 = item.num;
+                    break;
+                  case "中级":
+                    num82 = item.num;
+                    break;
+                  case "初级":
+                    num83 = item.num;
+                    break;
+                  case "无":
+                    num84 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n80_84) {
+          //   switch (n80_84.cas[1]) {
+          //     case "正高级":
+          //       num80 = n80_84.num;
+          //       break;
+          //     case "副高级":
+          //       num81 = n80_84.num;
+          //       break;
+          //     case "中级":
+          //       num82 = n80_84.num;
+          //       break;
+          //     case "初级":
+          //       num83 = n80_84.num;
+          //       break;
+          //     case "无":
+          //       num84 = n80_84.num;
+          //       break;
+          //   }
+          // }
 
           if (n85_89) {
-            switch (n85_89.cas[1]) {
-              case '正高级':
-                num85 = n85_89.num;
-                break;
-              case '副高级':
-                num86 = n85_89.num;
-                break;
-              case '中级':
-                num87 = n85_89.num;
-                break;
-              case '初级':
-                num88 = n85_89.num;
-                break;
-              case '无':
-                num89 = n85_89.num;
-                break;
-            }
+            n85_89.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num85 = item.num;
+                    break;
+                  case "副高级":
+                    num86 = item.num;
+                    break;
+                  case "中级":
+                    num87 = item.num;
+                    break;
+                  case "初级":
+                    num88 = item.num;
+                    break;
+                  case "无":
+                    num89 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n85_89) {
+          //   switch (n85_89.cas[1]) {
+          //     case "正高级":
+          //       num85 = n85_89.num;
+          //       break;
+          //     case "副高级":
+          //       num86 = n85_89.num;
+          //       break;
+          //     case "中级":
+          //       num87 = n85_89.num;
+          //       break;
+          //     case "初级":
+          //       num88 = n85_89.num;
+          //       break;
+          //     case "无":
+          //       num89 = n85_89.num;
+          //       break;
+          //   }
+          // }
 
           if (n90_94) {
-            switch (n90_94.cas[1]) {
-              case '正高级':
-                num90 = n90_94.num;
-                break;
-              case '副高级':
-                num91 = n90_94.num;
-                break;
-              case '中级':
-                num92 = n90_94.num;
-                break;
-              case '初级':
-                num93 = n90_94.num;
-                break;
-              case '无':
-                num94 = n90_94.num;
-                break;
-            }
+            n90_94.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num90 = item.num;
+                    break;
+                  case "副高级":
+                    num91 = item.num;
+                    break;
+                  case "中级":
+                    num92 = item.num;
+                    break;
+                  case "初级":
+                    num93 = item.num;
+                    break;
+                  case "无":
+                    num94 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n90_94) {
+          //   switch (n90_94.cas[1]) {
+          //     case "正高级":
+          //       num90 = n90_94.num;
+          //       break;
+          //     case "副高级":
+          //       num91 = n90_94.num;
+          //       break;
+          //     case "中级":
+          //       num92 = n90_94.num;
+          //       break;
+          //     case "初级":
+          //       num93 = n90_94.num;
+          //       break;
+          //     case "无":
+          //       num94 = n90_94.num;
+          //       break;
+          //   }
+          // }
 
           if (n95_99) {
-            switch (n95_99.cas[1]) {
-              case '正高级':
-                num95 = n95_99.num;
-                break;
-              case '副高级':
-                num96 = n95_99.num;
-                break;
-              case '中级':
-                num97 = n95_99.num;
-                break;
-              case '初级':
-                num98 = n95_99.num;
-                break;
-              case '无':
-                num99 = n95_99.num;
-                break;
-            }
+            n95_99.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num95 = item.num;
+                    break;
+                  case "副高级":
+                    num96 = item.num;
+                    break;
+                  case "中级":
+                    num97 = item.num;
+                    break;
+                  case "初级":
+                    num98 = item.num;
+                    break;
+                  case "无":
+                    num99 = item.num;
+                    break;
+                }
+            });
           }
+          // if (n95_99) {
+          //   switch (n95_99.cas[1]) {
+          //     case "正高级":
+          //       num95 = n95_99.num;
+          //       break;
+          //     case "副高级":
+          //       num96 = n95_99.num;
+          //       break;
+          //     case "中级":
+          //       num97 = n95_99.num;
+          //       break;
+          //     case "初级":
+          //       num98 = n95_99.num;
+          //       break;
+          //     case "无":
+          //       num99 = n95_99.num;
+          //       break;
+          //   }
+          // }
 
           if (n100_104) {
-            switch (n100_104.cas[1]) {
-              case '正高级':
-                num100 = n100_104.num;
-                break;
-              case '副高级':
-                num101 = n100_104.num;
-                break;
-              case '中级':
-                num102 = n100_104.num;
-                break;
-              case '初级':
-                num103 = n100_104.num;
-                break;
-              case '无':
-                num104 = n100_104.num;
-                break;
-            }
+            n100_104.forEach(item => {
+                switch (item.cas[1]) {
+                  case "正高级":
+                    num100 = item.num;
+                    break;
+                  case "副高级":
+                    num101 = item.num;
+                    break;
+                  case "中级":
+                    num102 = item.num;
+                    break;
+                  case "初级":
+                    num103 = item.num;
+                    break;
+                  case "无":
+                    num104 = item.num;
+                    break;
+                }
+            });
           }
-
+          // if (n100_104) {
+          //   switch (n100_104.cas[1]) {
+          //     case "正高级":
+          //       num100 = n100_104.num;
+          //       break;
+          //     case "副高级":
+          //       num101 = n100_104.num;
+          //       break;
+          //     case "中级":
+          //       num102 = n100_104.num;
+          //       break;
+          //     case "初级":
+          //       num103 = n100_104.num;
+          //       break;
+          //     case "无":
+          //       num104 = n100_104.num;
+          //       break;
+          //   }
+          // }
 
           break;
-        case '技能人员':
-
+        case "技能人员":
           let n105 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '职业资格一级（高级技师）');
+            return eachTwoClass.cas[0] === "职业资格一级（高级技师）";
           });
           if (n105) num105 = n105.num;
 
           let n106 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '职业资格二级（技师）');
+            return eachTwoClass.cas[0] === "职业资格二级（技师）";
           });
           if (n106) num106 = n106.num;
 
           let n107 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '职业资格三级（高级）');
+            return eachTwoClass.cas[0] === "职业资格三级（高级）";
           });
           if (n107) num107 = n107.num;
 
           let n108 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '职业资格四级（中级）');
+            return eachTwoClass.cas[0] === "职业资格四级（中级）";
           });
           if (n108) num108 = n108.num;
 
           let n109 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '职业资格五级（初级）');
+            return eachTwoClass.cas[0] === "职业资格五级（初级）";
           });
           if (n109) num109 = n109.num;
 
           let n110 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '无');
+            return eachTwoClass.cas[0] === "无";
           });
           if (n110) num110 = n110.num;
 
           break;
-        case '农村实用人员':
-
+        case "农村实用人员":
           let n111 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '生产型人才');
+            return eachTwoClass.cas[0] === "生产型人才";
           });
           if (n111) num111 = n111.num;
 
           let n112 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '经营型人才');
+            return eachTwoClass.cas[0] === "经营型人才";
           });
           if (n112) num112 = n112.num;
 
           let n113 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '技能服务型人才');
+            return eachTwoClass.cas[0] === "技能服务型人才";
           });
           if (n113) num113 = n113.num;
 
           let n114 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '技能带动型人才');
+            return eachTwoClass.cas[0] === "技能带动型人才";
           });
           if (n114) num114 = n114.num;
 
           let n115 = eachClass.children[4].value.find(eachTwoClass => {
-            return (eachTwoClass.cas[0] === '社会服务型人才');
+            return eachTwoClass.cas[0] === "社会服务型人才";
           });
           if (n115) num115 = n115.num;
 
           break;
-        case '社会工作人员':
-
+        case "社会工作人员":
           num116 = yearItem.info[0].children.inputChildren[4].value;
           break;
-        case '其他':
-
+        case "其他":
           num117 = yearItem.info[0].children.inputChildren[5].value;
           break;
       }
-    })
+    });
 
     info.push(num14);
     info.push(num15);
@@ -936,7 +1285,6 @@ export const summaryTransform = (_summary, fromTable) => {
     info.push(num127);
     info.push(num128);
 
-
     info.push(num129);
     info.push(num130);
     info.push(num131);
@@ -949,12 +1297,11 @@ export const summaryTransform = (_summary, fromTable) => {
     info.push(num138);
     info.push(num139);
 
-
     obj.info = info;
 
-    transformSummary.push(obj)
+    transformSummary.push(obj);
   }
 
   // 返回格式化后的_summary
   return transformSummary;
-}
+};
