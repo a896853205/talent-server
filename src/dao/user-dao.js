@@ -2,7 +2,6 @@ import { db } from '../resources/db-connect';
 import { formDao } from '../dao/form-dao';
 
 export const userDao = {
-
   // 增加用户
   insertUser: async (companyName, userRole, subUserCode) => {
     let collection = await db.get('company_users');
@@ -11,7 +10,7 @@ export const userDao = {
       writeRole = false,
       submitStatus = 0;
 
-    distributionRole = userRole.includes('分配用户权限')
+    distributionRole = userRole.includes('分配用户权限');
     writeRole = userRole.includes('填报权限');
 
     if (distributionRole && writeRole) {
@@ -33,7 +32,7 @@ export const userDao = {
       _user_code: subUserCode,
       _submit_status: submitStatus,
       _company_name: companyName,
-      _user_role: roleNum
+      _user_role: roleNum,
     });
   },
 
@@ -79,7 +78,7 @@ export const userDao = {
     let collection = await db.get('company_users'),
       user = await collection.findOne({ _user_name: userName });
 
-    if (!user || (user._user_password !== userPassword)) {
+    if (!user || user._user_password !== userPassword) {
       return;
     }
 
@@ -104,15 +103,18 @@ export const userDao = {
     for (let userCodeIndex = 0; userCodeIndex <= 12; userCodeIndex += 4) {
       userCodeArr.push(user._user_code.substr(userCodeIndex, 4));
     }
-    let length = userCodeArr.findIndex(userCodeItem => {
-      return (userCodeItem === '0000');
-    }) * 4;
+    let length =
+      userCodeArr.findIndex(userCodeItem => {
+        return userCodeItem === '0000';
+      }) * 4;
 
     subUser = await userDao.querySubUser(user._user_code);
 
     if (subUser.length) {
       // 找到最大的下属+1
-      codeNum = parseInt(subUser[subUser.length - 1]._user_code.substr(length, 4));
+      codeNum = parseInt(
+        subUser[subUser.length - 1]._user_code.substr(length, 4)
+      );
       codeNum++;
 
       if (codeNum < 10) {
@@ -122,20 +124,29 @@ export const userDao = {
       } else if (codeNum < 1000) {
         codeNum = '0' + codeNum;
       } else {
-        codeNum = '' + codeNum
+        codeNum = '' + codeNum;
       }
 
-      return `${subUser[0]._user_code.substr(0, length)}${codeNum}${subUser[0]._user_code.substr(length + 4)}`;
+      return `${subUser[0]._user_code.substr(
+        0,
+        length
+      )}${codeNum}${subUser[0]._user_code.substr(length + 4)}`;
     } else {
       // 当前没有下属
-      return `${user._user_code.substr(0, length)}0001${user._user_code.substr(length + 4)}`;
+      return `${user._user_code.substr(0, length)}0001${user._user_code.substr(
+        length + 4
+      )}`;
     }
   },
 
   // 根据userCode获取当前用户下属数据
   querySubUser: async userCode => {
+    const reg = new RegExp(`^${userCode.substr(0, 4)}`, 'g');
     let collections = await db.get('company_users'),
-      allUser = await collections.find({}, { sort: '_user_code' });
+      allUser = await collections.find(
+        { _user_code: reg },
+        { sort: '_user_code' }
+      );
 
     let subUserArr = [];
     let userCodeArr = []; // 下属code
@@ -144,9 +155,10 @@ export const userDao = {
     for (let userCodeIndex = 0; userCodeIndex <= 12; userCodeIndex += 4) {
       userCodeArr.push(userCode.substr(userCodeIndex, 4));
     }
-    let length = userCodeArr.findIndex(userCodeItem => {
-      return (userCodeItem === '0000');
-    }) * 4;
+    let length =
+      userCodeArr.findIndex(userCodeItem => {
+        return userCodeItem === '0000';
+      }) * 4;
 
     // 如果是一级或二级的账户需要判断后面是否是'0000'.
     // 三级不用判断,四级没有下属
@@ -155,12 +167,17 @@ export const userDao = {
       // 是一二级的
       // 获取下属
       subUserArr = allUser.filter(suUser => {
-        return (suUser._user_code.substr(0, length) === userCode.substr(0, length)) && ('0000' === suUser._user_code.substr(length + 4, 4));
+        return (
+          suUser._user_code.substr(0, length) === userCode.substr(0, length) &&
+          '0000' === suUser._user_code.substr(length + 4, 4)
+        );
       });
     } else {
       // 获取下属
       subUserArr = allUser.filter(suUser => {
-        return (suUser._user_code.substr(0, length) === userCode.substr(0, length));
+        return (
+          suUser._user_code.substr(0, length) === userCode.substr(0, length)
+        );
       });
     }
 
@@ -173,7 +190,7 @@ export const userDao = {
   submitManage: async userId => {
     let collections = await db.get('company_users');
 
-    collections.update({ _id: userId },{ "$set": { _submit_status: 1 } });
+    collections.update({ _id: userId }, { $set: { _submit_status: 1 } });
   },
 
   // 删除用户
@@ -193,8 +210,11 @@ export const userDao = {
     if (user._user_password !== oldPassword) {
       return;
     } else {
-      await collections.update({ _id: user._id }, {"$set": { _user_password: newPassword }});
+      await collections.update(
+        { _id: user._id },
+        { $set: { _user_password: newPassword } }
+      );
       return 1;
     }
-  }
-}
+  },
+};
